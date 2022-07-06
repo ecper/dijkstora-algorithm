@@ -1,20 +1,26 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
     <ion-title>
-      Blank
+      ダイクストラ
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+<ion-content>
+  <div *ngIf="selectedIndex1 === -1">
+    <ion-input>
+      開始地点をクリックしてください
+    </ion-input>
+    <ion-button *ngFor="let point of pointName let i = index" (click)="selectDistance(i, 1)">{{point}}</ion-button>
   </div>
+  <div *ngIf="selectedIndex1 !== -1 && selectedIndex2 === -1">
+    <ion-input>
+      終了地点を入力してください
+    </ion-input>
+    <ion-button *ngFor="let point of pointName let i = index" (click)="selectDistance(i, 2)">{{point}}</ion-button>
+  </div>
+
+  <ion-button *ngIf="selectedIndex1 !== -1 && selectedIndex2 !== -1" (click)="startCalculation()">計算開始</ion-button>
+
+  <ion-input [readonly]="true">距離:{{sumDistances}}</ion-input>
 </ion-content>
